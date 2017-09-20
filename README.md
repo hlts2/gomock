@@ -8,7 +8,42 @@ gomock is command line tool which makes simple API mock server
 go get github.com/hlts2/gomock
 ```
 
-### Usage
+## Example
+
+Create a `config.yml` file
+
+```
+endpoints:
+    - path: /api/v1/todos
+      method: GET
+      response_file: todos.json
+```
+
+Create a your json file (`todos.json`)
+
+```
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "hoge"
+    },
+    {
+      "id": 2,
+      "title": "foo"
+    }
+  ]
+}
+
+```
+
+Start JSON server
+
+```
+gomock run --s config.yml
+```
+
+## CLI Usage
 
 ```
 $ gomock --help
