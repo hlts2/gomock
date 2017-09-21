@@ -43,6 +43,36 @@ Start JSON server
 gomock run --s config.yml
 ```
 
+Mocked GET /api/v1/todos:
+
+```
+$ curl -v GET localhost:8080/api/v1/todos
+
+> GET /api/v1/todos HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.51.0
+> Accept: */*
+>
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Date: Wed, 20 Sep 2017 23:56:27 GMT
+< Content-Length: 119
+<
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "hoge"
+    },
+    {
+      "id": 2,
+      "title": "foo"
+    }
+  ]
+}
+
+```
+
 ## CLI Usage
 
 ```
