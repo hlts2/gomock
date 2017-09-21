@@ -7,13 +7,13 @@ import (
 	cli "github.com/spf13/cobra"
 )
 
-var RootCmd = &cli.Command{
+var rootCmd = &cli.Command{
 	Use:   "gomock",
 	Short: "A CLI tool for api mock server",
 }
 
-func Execute() {
-	if err := RootCmd.Execute(); err != nil {
+func execute() {
+	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}

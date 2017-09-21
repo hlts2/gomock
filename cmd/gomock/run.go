@@ -23,7 +23,7 @@ var runCmd = &cli.Command{
 var file string
 
 func init() {
-	RootCmd.AddCommand(runCmd)
+	rootCmd.AddCommand(runCmd)
 
 	runCmd.Flags().StringVar(&file, "set", "config.yml", "set config file")
 	runCmd.Flags().StringVar(&file, "s", "config.yml", "set config file")
