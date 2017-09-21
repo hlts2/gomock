@@ -19,7 +19,7 @@ endpoints:
       response_file: todos.json
 ```
 
-Create a your json file (ex `todos.json`)
+Create a response json file (ex `todos.json`)
 
 ```
 {
