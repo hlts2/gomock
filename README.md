@@ -44,7 +44,7 @@ Create a response json file (ex `todos.json`)
 Start JSON server
 
 ```
-gomock run --s config.yml
+gomock run -s config.yml
 ```
 
 Mocked GET /api/v1/todos:
@@ -86,6 +86,5 @@ Usage:
 
 Flags:
   -h, --help         help for run
-      --s string     set config file (default "config.yml")
-      --set string   set config file (default "config.yml")
+  -s, --set string   set config file (default "config.yml")
 ```
