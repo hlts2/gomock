@@ -1,0 +1,4 @@
+endpoints:
+    - path: /api/v1/todos
+      method: GET
+      response_file: todos.json
