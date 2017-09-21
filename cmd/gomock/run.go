@@ -25,8 +25,9 @@ var file string
 func init() {
 	rootCmd.AddCommand(runCmd)
 
-	runCmd.Flags().StringVar(&file, "set", "config.yml", "set config file")
-	runCmd.Flags().StringVar(&file, "s", "config.yml", "set config file")
+	runCmd.Flags().StringVarP(&file, "set", "s", "config.yml", "set config file")
+	//runCmd.Flags().StringVar(&file, "set", "config.yml", "set config file")
+	//runCmd.Flags().StringVar(&file, "s", "config.yml", "set config file")
 }
 
 func run(cmd *cli.Command, args []string) error {
