@@ -2,3 +2,7 @@ endpoints:
     - path: /api/v1/todos
       method: GET
       response_file: todos.json
+
+    - path: /api/v1/user
+      method: GET
+      response_file: user.json
