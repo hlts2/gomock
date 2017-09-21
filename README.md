@@ -80,7 +80,7 @@ $ curl -v GET localhost:8080/api/v1/todos
 ## CLI Usage
 
 ```
-$ gomock --help
+$ gomock run --help
 Usage:
   gomock run [flags]
 
