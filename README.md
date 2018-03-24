@@ -41,7 +41,7 @@ Create a response json file (ex `todos.json`)
 
 ```
 
-Start JSON server
+Start json mock server
 
 ```
 gomock run -s config.yml
