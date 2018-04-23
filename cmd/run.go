@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 
 	"github.com/hlts2/gomock/pkg/gomock"
@@ -30,14 +29,14 @@ func init() {
 }
 
 func run(cmd *cli.Command, args []string) error {
-	d, err := ioutil.ReadFile(configFile)
+	reader, err := os.Open(configFile)
 	if err != nil {
 		return err
 	}
 
 	var config gomock.Config
 
-	err = yaml.Unmarshal(d, &config)
+	err = yaml.NewDecoder(reader).Decode(&config)
 	if err != nil {
 		return err
 	}
