@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"github.com/hlts2/gomock/pkg/gomock"
-	"gopkg.in/yaml.v2"
 
 	cli "github.com/spf13/cobra"
 )
@@ -20,23 +19,18 @@ var runCmd = &cli.Command{
 	},
 }
 
-var configFileName string
+var configPath string
 
 func init() {
 	rootCmd.AddCommand(runCmd)
 
-	runCmd.Flags().StringVarP(&configFileName, "set", "s", "config.yml", "set config file")
+	runCmd.Flags().StringVarP(&configPath, "set", "s", "config.yml", "set config file")
 }
 
 func run(cmd *cli.Command, args []string) error {
-	file, err := os.Open(configFileName)
-	if err != nil {
-		return err
-	}
-
 	var config gomock.Config
 
-	err = yaml.NewDecoder(file).Decode(&config)
+	err := gomock.LoadConfig(configPath, &config)
 	if err != nil {
 		return err
 	}
