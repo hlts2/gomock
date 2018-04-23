@@ -10,18 +10,22 @@ import (
 	"strings"
 )
 
-type server struct {
-	conf Config
+type Server interface {
+	Launch() error
 }
 
-func NewServer(conf Config) *server {
+type server struct {
+	Config Config
+}
+
+func NewServer(config Config) Server {
 	return &server{
-		conf,
+		Config: config,
 	}
 }
 
 func (s *server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
-	for _, val := range s.conf.Endpoints {
+	for _, val := range s.Config.Endpoints {
 		if val.Path == req.URL.Path {
 			if val.Method == req.Method {
 
@@ -48,13 +52,13 @@ func (s *server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func RunServer(conf Config) error {
+func (s *server) Launch() error {
 	var port string
 	if port = os.Getenv("PORT"); len(port) == 0 {
 		port = "8080"
 	}
 
-	http.Handle("/", NewServer(conf))
+	http.Handle("/", s)
 
 	fmt.Println("Starting app on " + port)
 	return http.ListenAndServe(":"+port, nil)

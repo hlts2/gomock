@@ -35,12 +35,14 @@ func run(cmd *cli.Command, args []string) error {
 		return err
 	}
 
-	var conf gomock.Config
+	var config gomock.Config
 
-	err = yaml.Unmarshal(d, &conf)
+	err = yaml.Unmarshal(d, &config)
 	if err != nil {
 		return err
 	}
 
-	return gomock.RunServer(conf)
+	mockServer := gomock.NewServer(config)
+
+	return mockServer.Launch()
 }
