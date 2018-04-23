@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 
 	"github.com/hlts2/gomock/pkg/gomock"
 	"gopkg.in/yaml.v2"
@@ -15,7 +16,7 @@ var runCmd = &cli.Command{
 	Short: "Start API mock server",
 	Run: func(cmd *cli.Command, args []string) {
 		if err := run(cmd, args); err != nil {
-			fmt.Println(err)
+			fmt.Fprintln(os.Stderr, err)
 		}
 	},
 }
