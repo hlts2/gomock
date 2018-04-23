@@ -53,12 +53,9 @@ func (s *server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 }
 
 func (s *server) Launch() error {
-	var port string
-	if port = os.Getenv("PORT"); len(port) == 0 {
-		port = "8080"
-	}
-
 	http.Handle("/", s)
+
+	port := s.Config.Port
 
 	fmt.Println("Starting app on " + port)
 	return http.ListenAndServe(":"+port, nil)

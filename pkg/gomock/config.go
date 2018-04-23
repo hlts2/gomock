@@ -13,6 +13,7 @@ type Endpoint struct {
 }
 
 type Config struct {
+	Port      string     `yaml:port`
 	Endpoints []Endpoint `yaml:"endpoints"`
 }
 
