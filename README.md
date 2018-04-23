@@ -8,10 +8,6 @@ gomock is command line tool which makes simple API mock server
 go get github.com/hlts2/gomock
 ```
 
-```
-hlts2/gomock$ make install
-```
-
 ## Example
 
 Create a `config.yml` file
