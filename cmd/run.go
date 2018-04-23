@@ -20,16 +20,16 @@ var runCmd = &cli.Command{
 	},
 }
 
-var configFile string
+var configFileName string
 
 func init() {
 	rootCmd.AddCommand(runCmd)
 
-	runCmd.Flags().StringVarP(&configFile, "set", "s", "config.yml", "set config file")
+	runCmd.Flags().StringVarP(&configFileName, "set", "s", "config.yml", "set config file")
 }
 
 func run(cmd *cli.Command, args []string) error {
-	reader, err := os.Open(configFile)
+	reader, err := os.Open(configFileName)
 	if err != nil {
 		return err
 	}
