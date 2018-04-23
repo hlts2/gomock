@@ -1,10 +1,10 @@
-package main
+package cmd
 
 import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/hlts2/gomock"
+	"github.com/hlts2/gomock/pkg/gomock"
 	"gopkg.in/yaml.v2"
 
 	cli "github.com/spf13/cobra"
