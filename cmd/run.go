@@ -29,14 +29,14 @@ func init() {
 }
 
 func run(cmd *cli.Command, args []string) error {
-	reader, err := os.Open(configFileName)
+	file, err := os.Open(configFileName)
 	if err != nil {
 		return err
 	}
 
 	var config gomock.Config
 
-	err = yaml.NewDecoder(reader).Decode(&config)
+	err = yaml.NewDecoder(file).Decode(&config)
 	if err != nil {
 		return err
 	}
