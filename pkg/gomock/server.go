@@ -10,18 +10,22 @@ import (
 	"strings"
 )
 
-type Server interface {
-	Launch() error
-}
-
 type server struct {
 	Config Config
 }
 
-func NewServer(config Config) Server {
-	return &server{
+func NewServer(config Config) error {
+	s := &server{
 		Config: config,
 	}
+
+	http.Handle("/", s)
+
+	port := config.Port
+
+	fmt.Println("Starting app on " + port)
+
+	return http.ListenAndServe(":"+port, nil)
 }
 
 func (s *server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
@@ -50,13 +54,4 @@ func (s *server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 			}
 		}
 	}
-}
-
-func (s *server) Launch() error {
-	http.Handle("/", s)
-
-	port := s.Config.Port
-
-	fmt.Println("Starting app on " + port)
-	return http.ListenAndServe(":"+port, nil)
 }

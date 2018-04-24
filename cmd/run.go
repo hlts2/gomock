@@ -35,7 +35,5 @@ func run(cmd *cli.Command, args []string) error {
 		return err
 	}
 
-	mockServer := gomock.NewServer(config)
-
-	return mockServer.Launch()
+	return gomock.NewServer(config)
 }
