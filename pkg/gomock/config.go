@@ -7,9 +7,19 @@ import (
 )
 
 type Endpoint struct {
-	Path         string `yaml:"path"`
-	Method       string `yaml:"method"`
-	ResponseFile string `yaml:"response_file"`
+	Request  Request  `yaml:request`
+	Response Response `yaml:"response"`
+}
+
+type Request struct {
+	Path   string `yaml:"path"`
+	Method string `yaml:"method"`
+}
+
+type Response struct {
+	Code    string            `yaml:"code"`
+	Body    string            `yaml:"body"`
+	Headers map[string]string `yaml:"headers"`
 }
 
 type Config struct {

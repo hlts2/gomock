@@ -1,9 +1,19 @@
-port: "1234"
+port: 1234
 endpoints:
-    - path: /api/v1/todos
-      method: GET
-      response_file: todos.json
+    - request:
+        path: /api/v1/todos
+        method: GET
+      response:
+        code: 200
+        body: todos.json
+        headers:
+            content-type: text/json
 
-    - path: /api/v1/user
-      method: GET
-      response_file: user.json
+    - request:
+        path: /api/v1/user
+        method: GET
+      response:
+        code: 200
+        body: user.json
+        headers:
+            content-type: text/json

@@ -26,8 +26,8 @@ func NewServer(config Config) Server {
 
 func (s *server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	for _, val := range s.Config.Endpoints {
-		if val.Path == req.URL.Path {
-			if val.Method == req.Method {
+		if val.Request.Path == req.URL.Path {
+			if val.Request.Method == req.Method {
 
 				dir, err := os.Getwd()
 				if err != nil {
@@ -36,7 +36,7 @@ func (s *server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 					return
 				}
 
-				path := path.Join(dir, strings.Replace(val.ResponseFile, "..", "", -1))
+				path := path.Join(dir, strings.Replace(val.Response.Body, "..", "", -1))
 
 				d, err := ioutil.ReadFile(path)
 				if err != nil {
