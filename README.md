@@ -13,10 +13,16 @@ go get github.com/hlts2/gomock
 Create a `config.yml` file
 
 ```
+port: 1234
 endpoints:
-    - path: /api/v1/todos
-      method: GET
-      response_file: todos.json
+    - request:
+        path: /api/v1/todos
+        method: GET
+      response:
+        code: 200
+        body: todos.json # or `{"todos": [{"id": 1, "title": "hoge"}, {"id": 2, "title": "foo"}]}`
+        headers:
+            content-type: application/json
 ```
 
 Create a response json file (ex `todos.json`)
