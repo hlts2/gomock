@@ -3,6 +3,8 @@ package gomock
 import (
 	"os"
 
+	"regexp"
+
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -14,6 +16,7 @@ type Endpoint struct {
 type Request struct {
 	Path   string `yaml:"path"`
 	Method string `yaml:"method"`
+	Route  *regexp.Regexp
 }
 
 type Response struct {
@@ -37,6 +40,14 @@ func LoadConfig(path string, config *Config) error {
 	err = yaml.NewDecoder(f).Decode(config)
 	if err != nil {
 		return err
+	}
+
+	for _, endpoint := range config.Endpoints {
+		rgx, err := newRegepxRoute(endpoint.Request.Path)
+		if err != nil {
+			return err
+		}
+		endpoint.Request.Route = rgx
 	}
 
 	return nil
