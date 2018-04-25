@@ -11,7 +11,7 @@ func newRegexRoute(route string) (*regexp.Regexp, error) {
 	cnt := strings.Count(route, "?")
 	var routetpl = make([]byte, 0, len(route)+cnt)
 
-	for i, uPoint := range routetpl {
+	for i, uPoint := range route {
 		switch ch := string(uPoint); {
 		case ch == "?":
 			routetpl = append(routetpl, '\\', route[i])
@@ -32,6 +32,5 @@ func newRegexRoute(route string) (*regexp.Regexp, error) {
 			}
 		}
 	}
-
 	return regexp.Compile(bytes.NewBuffer(routetpl).String())
 }
