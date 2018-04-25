@@ -14,9 +14,9 @@ type Endpoint struct {
 }
 
 type Request struct {
-	Path   string `yaml:"path"`
-	Method string `yaml:"method"`
-	Route  *regexp.Regexp
+	Path       string `yaml:"path"`
+	Method     string `yaml:"method"`
+	RegexRoute *regexp.Regexp
 }
 
 type Response struct {
@@ -43,11 +43,11 @@ func LoadConfig(path string, config *Config) error {
 	}
 
 	for _, endpoint := range config.Endpoints {
-		rgx, err := newRegepxRoute(endpoint.Request.Path)
+		rgx, err := newRegexRoute(endpoint.Request.Path)
 		if err != nil {
 			return err
 		}
-		endpoint.Request.Route = rgx
+		endpoint.Request.RegexRoute = rgx
 	}
 
 	return nil

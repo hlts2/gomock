@@ -7,7 +7,7 @@ import (
 )
 
 // newRegepxRoute parse a route and returns a routeRegexp
-func newRegepxRoute(route string) (*regexp.Regexp, error) {
+func newRegexRoute(route string) (*regexp.Regexp, error) {
 	cnt := strings.Count(route, "?")
 	var routetpl = make([]byte, 0, len(route)+cnt)
 
