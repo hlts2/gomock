@@ -16,7 +16,7 @@ Create a `config.yml` file
 port: 1234
 endpoints:
     - request:
-        path: /api/v1/todos
+        path: /api/v1/todos/
         method: GET
       response:
         code: 200
