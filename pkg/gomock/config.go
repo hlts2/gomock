@@ -42,12 +42,15 @@ func LoadConfig(path string, config *Config) error {
 		return err
 	}
 
-	for _, endpoint := range config.Endpoints {
-		rgx, err := newRegexRoute(endpoint.Request.Path)
+	for i := 0; i < len(config.Endpoints); i++ {
+		request := &config.Endpoints[i].Request
+
+		regex, err := newRegexRoute(request.Method + request.Path)
 		if err != nil {
 			return err
 		}
-		endpoint.Request.RegexRoute = rgx
+
+		request.RegexRoute = regex
 	}
 
 	return nil
