@@ -52,7 +52,7 @@ gomock run -s config.yml
 Mocked GET /api/v1/todos:
 
 ```
-$ curl -v GET localhost:8080/api/v1/todos
+$ curl -v GET localhost:8080/api/v1/todos/
 
 > GET /api/v1/todos HTTP/1.1
 > Host: localhost:8080
