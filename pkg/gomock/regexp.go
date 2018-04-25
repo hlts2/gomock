@@ -25,12 +25,14 @@ func newRegexRoute(route string) (*regexp.Regexp, error) {
 			}
 
 			routetpl = routetpl[:cnt]
-			routetpl = append(routetpl, '.', '*', '?')
+			routetpl = append(routetpl, '[', '^', '/', ']', '+', '?')
 		default:
 			for _, v := range []byte(string(uPoint)) {
 				routetpl = append(routetpl, v)
 			}
 		}
 	}
+
+	routetpl = append(routetpl, '$')
 	return regexp.Compile(bytes.NewBuffer(routetpl).String())
 }

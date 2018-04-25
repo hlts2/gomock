@@ -1,7 +1,7 @@
 port: 1234
 endpoints:
     - request:
-        path: /api/v1/todos
+        path: /api/v1/todos/
         method: GET
       response:
         code: 200
@@ -10,7 +10,7 @@ endpoints:
             content-type: text/json
 
     - request:
-        path: /api/v1/user
+        path: /api/v1/user/{:id}/
         method: GET
       response:
         code: 200

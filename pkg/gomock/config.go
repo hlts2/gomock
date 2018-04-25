@@ -20,14 +20,26 @@ type Request struct {
 }
 
 type Response struct {
-	Code    string            `yaml:"code"`
+	Code    int               `yaml:"code"`
 	Body    string            `yaml:"body"`
 	Headers map[string]string `yaml:"headers"`
 }
 
 type Config struct {
-	Port      string     `yaml:port`
-	Endpoints []Endpoint `yaml:"endpoints"`
+	Port      string    `yaml:port`
+	Endpoints Endpoints `yaml:"endpoints"`
+}
+
+type Endpoints []Endpoint
+
+func (endpoints Endpoints) GetMachingEndpointIndex(method, path string) int {
+	for i, endpoint := range endpoints {
+		ok := endpoint.Request.RegexRoute.MatchString(method + path)
+		if ok {
+			return i
+		}
+	}
+	return -1
 }
 
 func LoadConfig(path string, config *Config) error {

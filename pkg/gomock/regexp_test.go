@@ -11,24 +11,24 @@ func TestNewRegexRoute(t *testing.T) {
 		want  string
 	}{
 		{
-			route: "GET/list/1",
-			want:  regexp.MustCompile("GET/list/1").String(),
+			route: "GET/list/1/",
+			want:  regexp.MustCompile("GET/list/1/$").String(),
 		},
 		{
-			route: "GET/list/{:id}",
-			want:  regexp.MustCompile("GET/list/.*?").String(),
+			route: "GET/list/{:id}/",
+			want:  regexp.MustCompile("GET/list/[^/]+?/$").String(),
 		},
 		{
-			route: "GET/list/{:id}/{:name}",
-			want:  regexp.MustCompile("GET/list/.*?/.*?").String(),
+			route: "GET/list/{:id}/{:name}/",
+			want:  regexp.MustCompile("GET/list/[^/]+?/[^/]+?/$").String(),
 		},
 		{
 			route: "GET/list?id={:id}",
-			want:  regexp.MustCompile("GET/list\\?id=.*?").String(),
+			want:  regexp.MustCompile("GET/list\\?id=[^/]+?$").String(),
 		},
 		{
 			route: "GET/search?ei={:ei}&q={:q}",
-			want:  regexp.MustCompile("GET/search\\?ei=.*?&q=.*?").String(),
+			want:  regexp.MustCompile("GET/search\\?ei=[^/]+?&q=[^/]+?$").String(),
 		},
 	}
 
