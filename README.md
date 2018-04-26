@@ -21,7 +21,7 @@ endpoints:
         method: GET
       response:
         code: 200
-        body: todos.json # or `{"todos": [{"id": 1, "title": "hoge"}, {"id": 2, "title": "foo"}]}`
+        body: todos.json
         headers:
             content-type: application/json
 ```
