@@ -17,3 +17,21 @@ endpoints:
         body: user.json
         headers:
             content-type: text/json
+
+    - request:
+        path: /api/v1/user/{:id}/name
+        method: GET
+      response:
+        code: 200
+        body: user_name.json
+        headers:
+            content-type: text/json
+
+    - request:
+        path: /api/v1/user?id={:id}
+        method: GET
+      response:
+        code: 200
+        body: user.json
+        headers:
+            content-type: text/json
