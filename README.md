@@ -32,7 +32,7 @@ Paths can have variables. They are defined using the format {:id} or {:name}.
 ```yaml
 path: /api/v1/user/{:id}/
 
-path: /api/v1/user/{:id}/{:name}/
+path: /api/v1/user/{:id}/name/
 
 path: /api/v1/user?id={:id}
 ```
