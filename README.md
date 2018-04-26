@@ -2,7 +2,7 @@
 
 gomock is command line tool which makes simple API mock server. No more waiting on backend teams to deliver services.
 
-# Install
+## Install
 
 ```shell
 go get github.com/hlts2/gomock
