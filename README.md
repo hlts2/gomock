@@ -44,7 +44,7 @@ endpoints:
 
 ```
 
-Start json mock server
+## Start mock server
 
 ```
 gomock run -s config.yml
