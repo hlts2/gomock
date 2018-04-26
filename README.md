@@ -57,13 +57,13 @@ path: /api/v1/users?id={:id}
 
 ```
 
-## Start API mock server
+### Start API mock server
 
 ```
 gomock run -s config.yml
 ```
 
-## Send request
+### Send request
 
 ```
 $ curl -v GET localhost:8080/api/v1/todos/
