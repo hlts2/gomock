@@ -1,33 +1,47 @@
 # gomock
 
-gomock is command line tool which makes simple API mock server
+gomock is command line tool which makes simple API mock server. No more waiting on backend teams to deliver services.
 
 # Install
 
-```
+```shell
 go get github.com/hlts2/gomock
 ```
 
 ## Example
 
-Create a `config.yml` file
+### Create a config file
+`config.yml` will help you get started mocking your API's.
 
-```
+```yaml
 port: 1234
 endpoints:
     - request:
         path: /api/v1/todos/
-        method: GET
+        method: GET //uppercase
       response:
         code: 200
-        body: todos.json # or `{"todos": [{"id": 1, "title": "hoge"}, {"id": 2, "title": "foo"}]}`
+        body: todos.json
         headers:
             content-type: application/json
 ```
 
-Create a response json file (ex `todos.json`)
+### Request path
+Paths can have variables. They are defined using the format {:id} or {:name}. 
 
+```yaml
+path: /api/v1/users/{:id}/
+
+path: /api/v1/users/{:id}/name/
+
+path: /api/v1/users/{:id}/bools/{:book_id}
+
+path: /api/v1/users?id={:id}
 ```
+
+### Create JSON response file
+
+```json
 {
   "todos": [
     {
@@ -43,13 +57,13 @@ Create a response json file (ex `todos.json`)
 
 ```
 
-Start json mock server
+## Start API mock server
 
 ```
 gomock run -s config.yml
 ```
 
-Mocked GET /api/v1/todos:
+## Send request
 
 ```
 $ curl -v GET localhost:8080/api/v1/todos/
@@ -79,7 +93,7 @@ $ curl -v GET localhost:8080/api/v1/todos/
 
 ```
 
-## CLI Usage
+## Usage
 
 ```
 $ gomock run --help
