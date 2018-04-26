@@ -31,8 +31,14 @@ Paths can have variables. They are defined using the format {:id} or {:name}.
 
 ```yaml
 path: /api/v1/users/{:id}/
+// Matching request ex) 
+// /api/v1/users/1/, /api/v1/users/a11111/ ...etc
 
 path: /api/v1/users/{:id}/name/
+// /api/v1/users/1/name/, /api/v1/users/a11111/name/ ...etc
+
+path: /api/v1/users/{:id}/bools/{:book_id}
+// /api/v1/users/1/bools/b2222/, /api/v1/users/a11111/bools/b3333/ ...etc
 
 path: /api/v1/users?id={:id}
 ```
