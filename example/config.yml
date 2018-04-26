@@ -19,7 +19,7 @@ endpoints:
             content-type: text/json
 
     - request:
-        path: /api/v1/user/{:id}/name
+        path: /api/v1/user/{:id}/name/
         method: GET
       response:
         code: 200
