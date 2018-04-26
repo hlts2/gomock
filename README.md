@@ -16,7 +16,7 @@ Create a `config.yml` file
 port: 1234
 endpoints:
     - request:
-        path: /api/v1/todos
+        path: /api/v1/todos/
         method: GET
       response:
         code: 200
@@ -52,7 +52,7 @@ gomock run -s config.yml
 Mocked GET /api/v1/todos:
 
 ```
-$ curl -v GET localhost:8080/api/v1/todos
+$ curl -v GET localhost:8080/api/v1/todos/
 
 > GET /api/v1/todos HTTP/1.1
 > Host: localhost:8080
