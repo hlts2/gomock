@@ -50,7 +50,7 @@ endpoints:
 gomock run -s config.yml
 ```
 
-Mocked GET /api/v1/todos:
+## Send request
 
 ```
 $ curl -v GET localhost:8080/api/v1/todos/
