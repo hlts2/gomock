@@ -26,7 +26,7 @@ endpoints:
             content-type: application/json
 ```
 
-### Create a response json file
+### Create JSON response file
 
 ```
 {
@@ -44,7 +44,7 @@ endpoints:
 
 ```
 
-## Start mock server
+## Start API mock server
 
 ```
 gomock run -s config.yml
