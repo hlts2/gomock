@@ -25,7 +25,7 @@ func NewServer(config Config) error {
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	machedEndpointIdx := s.Config.Endpoints.GetMachingEndpointIndex(req.Method, req.URL.Path)
+	machedEndpointIdx := s.Config.Endpoints.GetMachingEndpointIndex(req.Method, req.URL.String())
 	if machedEndpointIdx < 0 {
 		w.WriteHeader(http.StatusNoContent)
 		return
