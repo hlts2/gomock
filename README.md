@@ -10,7 +10,7 @@ go get github.com/hlts2/gomock
 
 ## Example
 
-### Create a `config.yml` file
+### Create a config file
 `config.yml` will help you get started mocking your API's.
 
 ```
