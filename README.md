@@ -18,7 +18,7 @@ port: 1234
 endpoints:
     - request:
         path: /api/v1/todos/
-        method: GET
+        method: GET //uppercase
       response:
         code: 200
         body: todos.json
