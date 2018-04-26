@@ -26,7 +26,7 @@ endpoints:
             content-type: application/json
 ```
 
-#### Request path
+### Request path
 Paths can have variables. They are defined using the format {:id} or {:name}. 
 
 ```yaml
