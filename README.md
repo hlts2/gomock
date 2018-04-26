@@ -13,7 +13,7 @@ go get github.com/hlts2/gomock
 ### Create a config file
 `config.yml` will help you get started mocking your API's.
 
-```
+```yaml
 port: 1234
 endpoints:
     - request:
