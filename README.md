@@ -26,6 +26,17 @@ endpoints:
             content-type: application/json
 ```
 
+#### Request path
+Paths can have variables. They are defined using the format {:id} or {:name}. 
+
+```
+path: /api/v1/user/id={:id}/
+
+path: /api/v1/user/id={:id}/name={:name}
+
+path: /api/v1/user?id={:id}
+```
+
 ### Create JSON response file
 
 ```
