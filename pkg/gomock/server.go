@@ -1,25 +1,31 @@
 package gomock
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/kpango/glg"
 )
 
 type server struct {
+	Logger *glg.Glg
 	Config Config
 }
 
 func NewServer(config Config) error {
 	s := &server{
 		Config: config,
+		Logger: glg.New(),
 	}
 
-	http.Handle("/", s)
+	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		s.Logger.Info(req.Method + " " + req.URL.String())
+		s.ServeHTTP(w, req)
+	})
 
 	port := config.Port
 
-	fmt.Println("Starting app on " + port)
+	s.Logger.Info("Starting app on " + port)
 
 	return http.ListenAndServe(":"+port, nil)
 }
