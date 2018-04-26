@@ -8,6 +8,12 @@
   version = "v1.0"
 
 [[projects]]
+  name = "github.com/kpango/glg"
+  packages = ["."]
+  revision = "fcb2a2966be7d6e3e94e72b1ab155a21c20b64c5"
+  version = "1.1"
+
+[[projects]]
   branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
@@ -28,6 +34,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a3c8107e6b3873ed033452f364bb0d194dfca9e6826709fca150987c61631b0e"
+  inputs-digest = "3b39f8fe1c784fcb4ddb4e41c326b29cef778cd586eae50f48102ba5d7bc8abe"
   solver-name = "gps-cdcl"
   solver-version = 1
