@@ -27,14 +27,14 @@ endpoints:
 ```
 
 ### Request path
-Paths can have variables. They are defined using the format {:id} or {:name}. 
+Paths can have variables. They are defined using the format {:id} or {:name}.
 
 ```yaml
 path: /api/v1/users/{:id}/
 
 path: /api/v1/users/{:id}/name/
 
-path: /api/v1/users/{:id}/bools/{:book_id}
+path: /api/v1/users/{:id}/bools/{:book_id}/
 
 path: /api/v1/users?id={:id}
 ```
