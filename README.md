@@ -1,4 +1,4 @@
-# gomock [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Go Report Card](https://goreportcard.com/badge/github.com/hlts2/gomock)](https://goreportcard.com/report/github.com/hlts2/gomock)
+# gomock [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Go Report Card](https://goreportcard.com/badge/github.com/hlts2/gomock)](https://goreportcard.com/report/github.com/hlts2/gomock) [![Join the chat at https://gitter.im/hlts2/gomock](https://badges.gitter.im/hlts2/gomock.svg)](https://gitter.im/hlts2/gomock?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 gomock is command line tool which makes simple API mock server. No more waiting on backend teams to deliver services.
 
