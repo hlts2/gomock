@@ -1,10 +1,10 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	"github.com/hlts2/gomock/cmd"
+	"github.com/kpango/glg"
 	"github.com/urfave/cli"
 )
 
@@ -18,6 +18,6 @@ func main() {
 	}
 
 	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
+		glg.Fatal(err)
 	}
 }
