@@ -5,6 +5,7 @@ import (
 	"github.com/urfave/cli"
 )
 
+// RunCommand is run command
 func RunCommand() cli.Command {
 	return cli.Command{
 		Name:  "run",
