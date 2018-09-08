@@ -1,39 +1,30 @@
 package cmd
 
 import (
-	"fmt"
-	"os"
-
 	"github.com/hlts2/gomock/pkg/gomock"
-
-	cli "github.com/spf13/cobra"
+	"github.com/urfave/cli"
 )
 
-var runCmd = &cli.Command{
-	Use:   "run",
-	Short: "Start API mock server",
-	Run: func(cmd *cli.Command, args []string) {
-		if err := run(cmd, args); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-		}
-	},
-}
+func RunCommand() cli.Command {
+	return cli.Command{
+		Name:  "run",
+		Usage: "serve API mock server",
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "set, s",
+				Usage: "set config file",
+				Value: "config.yml",
+			},
+		},
+		Action: func(ctxt *cli.Context) error {
+			var config gomock.Config
 
-var configPath string
+			err := gomock.LoadConfig(ctxt.String("set"), &config)
+			if err != nil {
+				return err
+			}
 
-func init() {
-	rootCmd.AddCommand(runCmd)
-
-	runCmd.Flags().StringVarP(&configPath, "set", "s", "config.yml", "set config file")
-}
-
-func run(cmd *cli.Command, args []string) error {
-	var config gomock.Config
-
-	err := gomock.LoadConfig(configPath, &config)
-	if err != nil {
-		return err
+			return gomock.NewServer(config)
+		},
 	}
-
-	return gomock.NewServer(config)
 }
