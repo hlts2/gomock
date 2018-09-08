@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/hlts2/gomock/pkg/gomock"
+	gmk "github.com/hlts2/gomock/pkg/gomock"
 	"github.com/urfave/cli"
 )
 
@@ -17,14 +17,14 @@ func RunCommand() cli.Command {
 			},
 		},
 		Action: func(ctxt *cli.Context) error {
-			var config gomock.Config
+			var config gmk.Config
 
-			err := gomock.LoadConfig(ctxt.String("set"), &config)
+			err := gmk.LoadConfig(ctxt.String("set"), &config)
 			if err != nil {
 				return err
 			}
 
-			return gomock.NewServer(config)
+			return gmk.NewServer(config).Serve()
 		},
 	}
 }

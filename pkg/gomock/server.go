@@ -7,23 +7,29 @@ import (
 	"github.com/kpango/glg"
 )
 
+type Server interface {
+	Serve() error
+}
+
 type server struct {
 	Logger *glg.Glg
 	Config Config
 }
 
-func NewServer(config Config) error {
-	s := &server{
+func NewServer(config Config) Server {
+	return &server{
 		Config: config,
 		Logger: glg.New(),
 	}
+}
 
+func (s *server) Serve() error {
 	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		s.Logger.Info(req.Method + " " + req.URL.String())
 		s.ServeHTTP(w, req)
 	})
 
-	port := config.Port
+	port := s.Config.Port
 
 	s.Logger.Info("Starting app on " + port)
 
