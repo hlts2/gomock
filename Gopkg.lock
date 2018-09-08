@@ -2,28 +2,16 @@
 
 
 [[projects]]
-  name = "github.com/inconshreveable/mousetrap"
-  packages = ["."]
-  revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
-  version = "v1.0"
-
-[[projects]]
   name = "github.com/kpango/glg"
   packages = ["."]
   revision = "fcb2a2966be7d6e3e94e72b1ab155a21c20b64c5"
   version = "1.1"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/spf13/cobra"
+  name = "github.com/urfave/cli"
   packages = ["."]
-  revision = "615425954c3b0d9485a7027d4d451fdcdfdee84e"
-
-[[projects]]
-  name = "github.com/spf13/pflag"
-  packages = ["."]
-  revision = "583c0c0531f06d5278b7d917446061adc344b5cd"
-  version = "v1.0.1"
+  revision = "cfb38830724cc34fedffe9a2a29fb54fa9169cd1"
+  version = "v1.20.0"
 
 [[projects]]
   name = "gopkg.in/yaml.v2"
@@ -34,6 +22,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "3b39f8fe1c784fcb4ddb4e41c326b29cef778cd586eae50f48102ba5d7bc8abe"
+  inputs-digest = "78665276484f90847679b1f2284bec1fb612796e8d06ed5dbc9734f8663ffbea"
   solver-name = "gps-cdcl"
   solver-version = 1
