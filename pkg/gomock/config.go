@@ -2,7 +2,6 @@ package gomock
 
 import (
 	"os"
-
 	"regexp"
 
 	yaml "gopkg.in/yaml.v2"
