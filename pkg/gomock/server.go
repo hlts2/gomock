@@ -7,6 +7,7 @@ import (
 	"github.com/kpango/glg"
 )
 
+// Server is core API mock server interface
 type Server interface {
 	Serve() error
 }
@@ -16,6 +17,7 @@ type server struct {
 	Config Config
 }
 
+// NewServer returns Server(*server) object
 func NewServer(config Config) Server {
 	return &server{
 		Config: config,
