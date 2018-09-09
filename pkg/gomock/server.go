@@ -26,19 +26,16 @@ func NewServer(config Config) Server {
 }
 
 func (s *server) Serve() error {
-	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		s.Logger.Info(req.Method + " " + req.URL.String())
-		s.ServeHTTP(w, req)
-	})
-
 	port := s.Config.Port
 
 	s.Logger.Info("Starting app on " + port)
 
-	return http.ListenAndServe(":"+port, nil)
+	return http.ListenAndServe(":"+port, s)
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	s.Logger.Info(req.Method + " " + req.URL.String())
+
 	machedEndpointIdx := s.Config.Endpoints.GetMachingEndpointIndex(req.Method, req.URL.String())
 	if machedEndpointIdx < 0 {
 		w.WriteHeader(http.StatusNoContent)
