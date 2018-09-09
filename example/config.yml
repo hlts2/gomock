@@ -28,6 +28,15 @@ endpoints:
             content-type: text/json
 
     - request:
+        path: /api/v1/user?id=1234
+        method: GET
+      response:
+        code: 200
+        body: user2.json
+        headers:
+            content-type: text/json
+
+    - request:
         path: /api/v1/user?id={:id}
         method: GET
       response:
