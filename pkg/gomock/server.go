@@ -44,18 +44,18 @@ func (s *server) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	response := s.Config.Endpoints[machedEndpointIdx].Response
 
-	d, err := ioutil.ReadFile(response.Body)
-	if err != nil {
-		w.WriteHeader(http.StatusNotFound)
-		return
-	}
-
 	for key, value := range response.Headers {
 		if _, ok := w.Header()[key]; ok {
 			w.Header().Add(key, value)
 		} else {
 			w.Header().Set(key, value)
 		}
+	}
+
+	d, err := ioutil.ReadFile(response.Body)
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		return
 	}
 
 	w.WriteHeader(response.Code)
