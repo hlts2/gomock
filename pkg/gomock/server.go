@@ -10,7 +10,7 @@ import (
 )
 
 // ErrUnsupportedHTTPMethod is error of unsupported HTTP method
-var ErrUnsupportedHTTPMethod = errors.New("unsupported HTTP methpd")
+var ErrUnsupportedHTTPMethod = errors.New("unsupported HTTP method")
 
 // Server is core API mock server interface
 type Server interface {
