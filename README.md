@@ -27,16 +27,16 @@ endpoints:
 ```
 
 ### Request path
-Paths can have variables. They are defined using the format {:id} or {:name}.
+Paths can have variables. They are defined using the format :id or *.
 
 ```yaml
-path: /api/v1/users/{:id}/
+path: /api/v1/users/:id/
 
-path: /api/v1/users/{:id}/name/
+path: /api/v1/users/:id/name/
 
-path: /api/v1/users/{:id}/bools/{:book_id}/
+path: /api/v1/users/:id/bools/:book_id/
 
-path: /api/v1/users?id={:id}
+path: /api/v1/users/*
 ```
 
 ### Create JSON response file
