@@ -10,7 +10,7 @@ endpoints:
             content-type: text/json
 
     - request:
-        path: /api/v1/user/{:id}/
+        path: /api/v1/user/:id/
         method: GET
       response:
         code: 200
@@ -19,7 +19,7 @@ endpoints:
             content-type: text/json
 
     - request:
-        path: /api/v1/user/{:id}/name/
+        path: /api/v1/user/:id/name/
         method: GET
       response:
         code: 200
@@ -28,7 +28,7 @@ endpoints:
             content-type: text/json
 
     - request:
-        path: /api/v1/user?id={:id}
+        path: /api/v1/user?id=:id
         method: GET
       response:
         code: 200
