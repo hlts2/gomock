@@ -13,8 +13,13 @@ func RunCommand() cli.Command {
 		Flags: []cli.Flag{
 			cli.StringFlag{
 				Name:  "set, s",
-				Usage: "set config file",
+				Usage: "configuration file",
 				Value: "config.yml",
+			},
+			cli.StringFlag{
+				Name:  "tls-path",
+				Usage: "directory to the TLS server.crt/server.key file",
+				Value: "",
 			},
 		},
 		Action: func(ctxt *cli.Context) error {
