@@ -51,7 +51,11 @@ func (s *server) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	}
 
 	for key, value := range response.Headers {
-		w.Header().Set(key, value)
+		if _, ok := w.Header()[key]; ok {
+			w.Header().Add(key, value)
+		} else {
+			w.Header().Set(key, value)
+		}
 	}
 
 	w.WriteHeader(response.Code)
