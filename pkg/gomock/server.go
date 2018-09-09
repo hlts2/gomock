@@ -64,15 +64,20 @@ func (s *server) loadRoute() error {
 
 func (s *server) ServeHTTP(ctxt *lilty.Context) {
 	glg.Info(ctxt.Request.Method + " " + ctxt.Request.URL.String())
+
 	for _, e := range s.endpoints {
 		if e.Request.Method == ctxt.Request.Method && e.Request.Path == ctxt.Route() {
+			if e.Response.Code < 200 && e.Response.Code > 500 {
+				return
+			}
+
 			for key, value := range e.Response.Headers {
-				ctxt.SetResponseHeader(key, value)
+				ctxt.AddResponseHeader(key, value)
 			}
 
 			d, err := ioutil.ReadFile(e.Response.Body)
 			if err != nil {
-				ctxt.SetStatusCode(http.StatusNoContent)
+				ctxt.SetStatusCode(http.StatusNotFound)
 				return
 			}
 
