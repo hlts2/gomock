@@ -38,7 +38,7 @@ func (s *server) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	machedEndpointIdx := s.Config.Endpoints.GetMachingEndpointIndex(req.Method, req.URL.String())
 	if machedEndpointIdx < 0 {
-		w.WriteHeader(http.StatusNoContent)
+		w.WriteHeader(http.StatusNotFound)
 		return
 	}
 
@@ -46,7 +46,7 @@ func (s *server) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	d, err := ioutil.ReadFile(response.Body)
 	if err != nil {
-		w.WriteHeader(http.StatusNoContent)
+		w.WriteHeader(http.StatusNotFound)
 		return
 	}
 
