@@ -2,7 +2,6 @@ package gomock
 
 import (
 	"os"
-	"regexp"
 
 	yaml "gopkg.in/yaml.v2"
 )
@@ -15,9 +14,8 @@ type Endpoint struct {
 
 // Request represents request info of API mock
 type Request struct {
-	Path       string `yaml:"path"`
-	Method     string `yaml:"method"`
-	RegexRoute *regexp.Regexp
+	Path   string `yaml:"path"`
+	Method string `yaml:"method"`
 }
 
 // Response represents response info of API mock
@@ -36,17 +34,6 @@ type Config struct {
 // Endpoints is Endpoint slice
 type Endpoints []Endpoint
 
-// GetMachingEndpointIndex returns the element number of the endpoint matching the given method name and path
-func (endpoints Endpoints) GetMachingEndpointIndex(method, path string) int {
-	for i, endpoint := range endpoints {
-		ok := endpoint.Request.RegexRoute.MatchString(method + path)
-		if ok {
-			return i
-		}
-	}
-	return -1
-}
-
 // LoadConfig load configuration file of given file path
 func LoadConfig(path string, config *Config) error {
 	f, err := os.Open(path)
@@ -55,21 +42,5 @@ func LoadConfig(path string, config *Config) error {
 	}
 	defer f.Close()
 
-	err = yaml.NewDecoder(f).Decode(config)
-	if err != nil {
-		return err
-	}
-
-	for i := 0; i < len(config.Endpoints); i++ {
-		request := &config.Endpoints[i].Request
-
-		regex, err := newRegexRoute(request.Method + request.Path)
-		if err != nil {
-			return err
-		}
-
-		request.RegexRoute = regex
-	}
-
-	return nil
+	return yaml.NewDecoder(f).Decode(config)
 }
