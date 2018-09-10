@@ -23,7 +23,7 @@ func newRegexRoute(route string) (*regexp.Regexp, error) {
 		case closeBracket:
 			cnt := 0
 			for _, v := range routetpl {
-				if string(v) == "{" {
+				if v == '{' {
 					break
 				}
 				cnt++
