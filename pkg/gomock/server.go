@@ -10,6 +10,7 @@ import (
 // Server is core API mock server interface
 type Server interface {
 	Serve() error
+	ServeTLS(crtPath, keyPath string) error
 }
 
 type server struct {
@@ -31,6 +32,14 @@ func (s *server) Serve() error {
 	s.Logger.Info("Starting app on " + port)
 
 	return http.ListenAndServe(":"+port, s)
+}
+
+func (s *server) ServeTLS(crtPath, keyPath string) error {
+	port := s.Config.Port
+
+	s.Logger.Info("Starting app on " + port)
+
+	return http.ListenAndServeTLS(":"+port, crtPath, keyPath, s)
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, req *http.Request) {

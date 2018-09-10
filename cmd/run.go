@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"path/filepath"
+
 	gmk "github.com/hlts2/gomock/pkg/gomock"
 	"github.com/urfave/cli"
 )
@@ -30,7 +32,17 @@ func RunCommand() cli.Command {
 				return err
 			}
 
-			return gmk.NewServer(config).Serve()
+			dir := ctxt.String("tls-path")
+			if len(dir) == 0 {
+				return gmk.NewServer(config).Serve()
+			}
+
+			var (
+				crtPath = filepath.Join(dir, "server.crt")
+				keyPath = filepath.Join(dir, "server.key")
+			)
+
+			return gmk.NewServer(config).ServeTLS(crtPath, keyPath)
 		},
 	}
 }
