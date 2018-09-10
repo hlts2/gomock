@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var (
+const (
 	questionMark rune = 63  // ?
 	endBrackets  rune = 125 // }
 )
