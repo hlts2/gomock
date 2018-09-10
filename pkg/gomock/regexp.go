@@ -6,9 +6,9 @@ import (
 	"strings"
 )
 
-const (
-	questionMark rune = 63  // ?
-	endBrackets  rune = 125 // }
+var (
+	question     rune = 63  // ?
+	closeBracket rune = 125 // }
 )
 
 // newRegepxRoute parse a route and returns a routeRegexp
@@ -18,9 +18,9 @@ func newRegexRoute(route string) (*regexp.Regexp, error) {
 
 	for i, uPoint := range route {
 		switch uPoint {
-		case questionMark:
+		case question:
 			routetpl = append(routetpl, '\\', route[i])
-		case endBrackets:
+		case closeBracket:
 			cnt := 0
 			for _, v := range routetpl {
 				if string(v) == "{" {
