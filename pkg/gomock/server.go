@@ -67,7 +67,7 @@ func (s *server) ServeHTTP(ctxt *lilty.Context) {
 
 	for _, e := range s.endpoints {
 		if e.Request.Method == ctxt.Request.Method && e.Request.Path == ctxt.Route() {
-			if e.Response.Code < 200 && e.Response.Code > 500 {
+			if e.Response.Code < 100 || e.Response.Code > 500 {
 				return
 			}
 
