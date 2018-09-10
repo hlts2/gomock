@@ -44,6 +44,10 @@ func (s *server) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	response := s.Config.Endpoints[machedEndpointIdx].Response
 
+	if response.Code < 100 || response.Code > 500 {
+		return
+	}
+
 	for key, value := range response.Headers {
 		if _, ok := w.Header()[key]; ok {
 			w.Header().Add(key, value)
