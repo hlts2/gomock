@@ -36,15 +36,15 @@ type Config struct {
 // Endpoints is Endpoint slice
 type Endpoints []Endpoint
 
-// GetMachingEndpointIndex returns the element number of the endpoint matching the given method name and path
-func (endpoints Endpoints) GetMachingEndpointIndex(method, path string) int {
-	for i, endpoint := range endpoints {
+// MatchedEndpoint returns the element number of the endpoint that matched the given method name and path
+func (endpoints Endpoints) MatchedEndpoint(method, path string) (Endpoint, bool) {
+	for _, endpoint := range endpoints {
 		ok := endpoint.Request.RegexRoute.MatchString(method + path)
 		if ok {
-			return i
+			return endpoint, true
 		}
 	}
-	return -1
+	return Endpoint{}, false
 }
 
 // LoadConfig load configuration file of given file path

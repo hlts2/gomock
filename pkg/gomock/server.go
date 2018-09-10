@@ -45,13 +45,13 @@ func (s *server) ServeTLS(crtPath, keyPath string) error {
 func (s *server) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	s.Logger.Info(req.Method + " " + req.URL.String())
 
-	machedEndpointIdx := s.Config.Endpoints.GetMachingEndpointIndex(req.Method, req.URL.String())
-	if machedEndpointIdx < 0 {
+	endpoint, ok := s.Config.Endpoints.MatchedEndpoint(req.Method, req.URL.String())
+	if !ok {
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}
 
-	response := s.Config.Endpoints[machedEndpointIdx].Response
+	response := endpoint.Response
 
 	if response.Code < 100 || response.Code > 500 {
 		return

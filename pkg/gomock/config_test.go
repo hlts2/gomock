@@ -1,6 +1,7 @@
 package gomock
 
 import (
+	"reflect"
 	"regexp"
 	"testing"
 )
@@ -29,28 +30,48 @@ func TestGetMachingEndpointIndex(t *testing.T) {
 		},
 	}
 
-	index := endpoints.GetMachingEndpointIndex("GET", "/list/1/")
-	if index == -1 {
-		t.Errorf("GetMachingEndpointIndex(method, path) expected: %v, got: %v", 0, index)
+	e, ok := endpoints.MatchedEndpoint("GET", "/list/1/")
+	if !ok {
+		t.Errorf("MatchedEndpoint ok is wrong. expected: %v, got: %v", true, false)
 	}
 
-	index = endpoints.GetMachingEndpointIndex("GET", "/list/{:id}/name/")
-	if index == -1 {
-		t.Errorf("GetMachingEndpointIndex(method, path) expected: %v, got: %v", 1, index)
+	if !reflect.DeepEqual(e, endpoints[0]) {
+		t.Errorf("MatchedEndpoint e is wrong. expected: %v, got: %v", endpoints[0], e)
 	}
 
-	index = endpoints.GetMachingEndpointIndex("GET", "/list?id={:id}")
-	if index == -1 {
-		t.Errorf("GetMachingEndpointIndex(method, path) expected: %v, got: %v", 2, index)
+	e, ok = endpoints.MatchedEndpoint("GET", "/list/{:id}/name/")
+	if !ok {
+		t.Errorf("MatchedEndpoint ok is wrong. expected: %v, got: %v", true, false)
 	}
 
-	index = endpoints.GetMachingEndpointIndex("GET", "/search?ei={:ei}&q={:q}")
-	if index == -1 {
-		t.Errorf("GetMachingEndpointIndex(method, path) expected: %v, got: %v", 3, index)
+	if !reflect.DeepEqual(e, endpoints[1]) {
+		t.Errorf("MatchedEndpoint e is wrong. expected: %v, got: %v", endpoints[1], e)
 	}
 
-	index = endpoints.GetMachingEndpointIndex("GET", "/search?ei={:ei}&q={:q}&hoge=11")
-	if index != -1 {
-		t.Errorf("GetMachingEndpointIndex(method, path) expected: %v, got: %v", -1, index)
+	e, ok = endpoints.MatchedEndpoint("GET", "/list?id={:id}")
+	if !ok {
+		t.Errorf("MatchedEndpoint ok is wrong. expected: %v, got: %v", true, false)
+	}
+
+	if !reflect.DeepEqual(e, endpoints[2]) {
+		t.Errorf("MatchedEndpoint e is wrong. expected: %v, got: %v", endpoints[2], e)
+	}
+
+	e, ok = endpoints.MatchedEndpoint("GET", "/search?ei={:ei}&q={:q}")
+	if !ok {
+		t.Errorf("MatchedEndpoint ok is wrong. expected: %v, got: %v", true, false)
+	}
+
+	if !reflect.DeepEqual(e, endpoints[3]) {
+		t.Errorf("MatchedEndpoint e is wrong. expected: %v, got: %v", endpoints[2], e)
+	}
+
+	e, ok = endpoints.MatchedEndpoint("GET", "/search?ei={:ei}&q={:q}&hoge=11")
+	if ok {
+		t.Errorf("MatchedEndpoint is wrong. expected: %v, got: %v", false, true)
+	}
+
+	if !reflect.DeepEqual(e, Endpoint{}) {
+		t.Errorf("MatchedEndpoint e is wrong. expected: %v, got: %v", Endpoint{}, e)
 	}
 }
