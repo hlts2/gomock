@@ -6,16 +6,21 @@ import (
 	"strings"
 )
 
+var (
+	questionMark rune = 63  // ?
+	endBrackets  rune = 125 // }
+)
+
 // newRegepxRoute parse a route and returns a routeRegexp
 func newRegexRoute(route string) (*regexp.Regexp, error) {
 	cnt := strings.Count(route, "?")
 	var routetpl = make([]byte, 0, len(route)+cnt)
 
 	for i, uPoint := range route {
-		switch ch := string(uPoint); {
-		case ch == "?":
+		switch uPoint {
+		case questionMark:
 			routetpl = append(routetpl, '\\', route[i])
-		case ch == "}":
+		case endBrackets:
 			cnt := 0
 			for _, v := range routetpl {
 				if string(v) == "{" {
