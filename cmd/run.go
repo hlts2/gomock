@@ -11,11 +11,11 @@ import (
 func RunCommand() cli.Command {
 	return cli.Command{
 		Name:  "run",
-		Usage: "serve API mock server",
+		Usage: "start API mock server",
 		Flags: []cli.Flag{
 			cli.StringFlag{
 				Name:  "set, s",
-				Usage: "configuration file",
+				Usage: "config file",
 				Value: "config.yml",
 			},
 			cli.StringFlag{
@@ -32,9 +32,11 @@ func RunCommand() cli.Command {
 				return err
 			}
 
+			server := gmk.NewServer(config)
+
 			dir := ctxt.String("tls-path")
 			if len(dir) == 0 {
-				return gmk.NewServer(config).Serve()
+				return server.Serve()
 			}
 
 			var (
@@ -42,7 +44,7 @@ func RunCommand() cli.Command {
 				keyPath = filepath.Join(dir, "server.key")
 			)
 
-			return gmk.NewServer(config).ServeTLS(crtPath, keyPath)
+			return server.ServeTLS(crtPath, keyPath)
 		},
 	}
 }
