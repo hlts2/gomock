@@ -97,10 +97,13 @@ $ curl -v localhost:1234/api/v1/todos/
 
 ```
 $ gomock run --help
-Usage:
-  gomock run [flags]
+NAME:
+   gomock run - start API mock server
 
-Flags:
-  -h, --help         help for run
-  -s, --set string   set config file (default "config.yml")
+USAGE:
+   gomock run [command options] [arguments...]
+
+OPTIONS:
+   --set value, -s value  config file (default: "config.yml")
+   --tls-path value       directory to the TLS server.crt/server.key file
 ```
