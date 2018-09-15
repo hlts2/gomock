@@ -1,6 +1,7 @@
 package gomock
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 )
@@ -20,6 +21,25 @@ type Router interface {
 type router struct {
 	trees     []Trie
 	endpoints []Endpoint
+}
+
+// NewRouter returns Router(*router) object
+func NewRouter(endPoints []Endpoint) Router {
+	r := &router{
+		trees:     make([]Trie, 0, HTTPMethodCount),
+		endpoints: endPoints,
+	}
+
+	for i := 0; i < HTTPMethodCount; i++ {
+		r.trees = append(r.trees, NewTrie())
+	}
+
+	fmt.Println(r.trees)
+	for _, endPoint := range endPoints {
+		r.addRoute(endPoint)
+	}
+
+	return r
 }
 
 func (r *router) Get(path string, response Response) {
@@ -72,20 +92,6 @@ func (r *router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	w.WriteHeader(resp.Code)
 	w.Write(d)
-}
-
-// NewRouter returns Router(*router) object
-func NewRouter(endPoints []Endpoint) Router {
-	r := &router{
-		trees:     make([]Trie, 0, HTTPMethodCount),
-		endpoints: endPoints,
-	}
-
-	for _, endPoint := range endPoints {
-		r.addRoute(endPoint)
-	}
-
-	return r
 }
 
 func (r *router) addRoute(endpoint Endpoint) {

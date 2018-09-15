@@ -1,6 +1,7 @@
 package gomock
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/kpango/glg"
@@ -23,6 +24,7 @@ type server struct {
 
 // NewServer returns Server(*server) object
 func NewServer(config *Config) Server {
+	fmt.Println("hoge")
 	return &server{
 		port:   config.Port,
 		router: NewRouter(config.Endpoints),
