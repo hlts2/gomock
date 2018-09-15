@@ -94,6 +94,10 @@ func (t *trie) Search(path string) (Response, bool) {
 		return n.response, true
 	}
 
+	if path[len(path)-1] == '/' {
+		path = path[:len(path)-1]
+	}
+
 	return t.search(path, n)
 }
 
