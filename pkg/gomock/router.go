@@ -1,7 +1,6 @@
 package gomock
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 )
@@ -34,7 +33,6 @@ func NewRouter(endPoints []Endpoint) Router {
 		r.trees = append(r.trees, NewTrie())
 	}
 
-	fmt.Println(r.trees)
 	for _, endPoint := range endPoints {
 		r.addRoute(endPoint)
 	}
