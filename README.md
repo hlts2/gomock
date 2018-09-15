@@ -30,13 +30,13 @@ endpoints:
 Paths can have variables. They are defined using the format {:id} or {:name}.
 
 ```yaml
-path: /api/v1/users/{:id}/
+path: /api/v1/users/*/          // match: /api/v1/users/little/, /api/v1/users/tiny/, etc
 
-path: /api/v1/users/{:id}/name/
+path: /api/v1/users/*/name/     // match: /api/v1/users/g444/name/, /api/v1/users/f5444/name/, etc
 
-path: /api/v1/users/{:id}/bools/{:book_id}/
+path: /api/v1/users/*/bools/*/  // match: /api/v1/users/111/books/f343/, /api/v1/users/4444/books/d343/, etc
 
-path: /api/v1/users?id={:id}
+path: /api/v1/users?id=*        // match: /api/v1/users?id=1111, /api/v1/users?id=2222, etc
 ```
 
 ### Create JSON response file
