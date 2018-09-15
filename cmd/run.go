@@ -32,7 +32,7 @@ func RunCommand() cli.Command {
 				return err
 			}
 
-			server := gmk.NewServer(config)
+			server := gmk.NewServer(&config)
 
 			dir := ctxt.String("tls-path")
 			if len(dir) == 0 {
