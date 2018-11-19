@@ -1,10 +1,10 @@
 package gomock
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/kpango/glg"
+	"github.com/pkg/errors"
 )
 
 // Server is core API mock server interface
@@ -24,7 +24,6 @@ type server struct {
 
 // NewServer returns Server(*server) object
 func NewServer(config *Config) Server {
-	fmt.Println("hoge")
 	return &server{
 		port:   config.Port,
 		router: NewRouter(config.Endpoints),
@@ -33,10 +32,18 @@ func NewServer(config *Config) Server {
 
 func (s *server) Serve() error {
 	glg.Info("Starting app on " + s.port)
-	return http.ListenAndServe(":"+s.port, s.router)
+	err := http.ListenAndServe(":"+s.port, s.router)
+	if err != nil {
+		return errors.Wrap(err, "faild to listen")
+	}
+	return nil
 }
 
 func (s *server) ServeTLS(crtPath, keyPath string) error {
 	glg.Info("Starting app on " + s.port)
-	return http.ListenAndServeTLS(":"+s.port, crtPath, keyPath, s.router)
+	err := http.ListenAndServeTLS(":"+s.port, crtPath, keyPath, s.router)
+	if err != nil {
+		return errors.Wrap(err, "faild to listen")
+	}
+	return nil
 }

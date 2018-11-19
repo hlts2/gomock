@@ -4,6 +4,7 @@ import (
 	"path/filepath"
 
 	gmk "github.com/hlts2/gomock/pkg/gomock"
+	"github.com/pkg/errors"
 	"github.com/urfave/cli"
 )
 
@@ -29,14 +30,18 @@ func RunCommand() cli.Command {
 
 			err := gmk.LoadConfig(ctxt.String("set"), &config)
 			if err != nil {
-				return err
+				return errors.Wrap(err, "faild to load configuration file")
 			}
 
 			server := gmk.NewServer(&config)
 
 			dir := ctxt.String("tls-path")
 			if len(dir) == 0 {
-				return server.Serve()
+				err := server.Serve()
+				if err != nil {
+					return errors.Wrap(err, "faild to run server")
+				}
+				return nil
 			}
 
 			var (
@@ -44,7 +49,11 @@ func RunCommand() cli.Command {
 				keyPath = filepath.Join(dir, "server.key")
 			)
 
-			return server.ServeTLS(crtPath, keyPath)
+			err = server.ServeTLS(crtPath, keyPath)
+			if err != nil {
+				return errors.Wrap(err, "faild to run server")
+			}
+			return nil
 		},
 	}
 }

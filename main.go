@@ -5,6 +5,7 @@ import (
 
 	"github.com/hlts2/gomock/cmd"
 	"github.com/kpango/glg"
+	"github.com/pkg/errors"
 	"github.com/urfave/cli"
 )
 
@@ -18,6 +19,6 @@ func main() {
 	}
 
 	if err := app.Run(os.Args); err != nil {
-		glg.Fatal(err)
+		glg.Fatal(errors.Wrap(err, "exit app because an error occurred"))
 	}
 }

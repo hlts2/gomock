@@ -3,6 +3,8 @@ package gomock
 import (
 	"os"
 
+	"github.com/pkg/errors"
+
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -38,13 +40,13 @@ type Endpoints []Endpoint
 func LoadConfig(path string, config *Config) error {
 	f, err := os.Open(path)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "faild to open configuration file")
 	}
 	defer f.Close()
 
 	err = yaml.NewDecoder(f).Decode(config)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "faild to decode configuration file")
 	}
 
 	return nil
